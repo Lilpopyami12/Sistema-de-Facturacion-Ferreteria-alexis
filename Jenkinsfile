@@ -100,7 +100,7 @@ pipeline {
           mkdir -p jmeter-tests/dashboard
           docker run --rm --network host \
             -v "$PWD:/work" \
-            justb4/jmeter:5.6.3 \
+            alpine/jmeter:5.6.3 \
             -n \
             -t /work/jmeter-tests/ferreteria-api.jmx \
             -l /work/jmeter-tests/results.jtl \
