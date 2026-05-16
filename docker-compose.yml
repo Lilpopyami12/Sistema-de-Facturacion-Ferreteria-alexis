@@ -1,14 +1,14 @@
 services:
   postgres:
     image: postgres:16
-    container_name: ferreteria_alexis_postgres
+    container_name: ${POSTGRES_CONTAINER_NAME:-ferreteria_alexis_postgres}
     restart: unless-stopped
     environment:
       POSTGRES_DB: ferreteria_alexis
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
-      - "55432:5432"
+      - "${POSTGRES_HOST_PORT:-55432}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -19,13 +19,13 @@ services:
 
   pgadmin:
     image: dpage/pgadmin4:8
-    container_name: ferreteria_alexis_pgadmin
+    container_name: ${PGADMIN_CONTAINER_NAME:-ferreteria_alexis_pgadmin}
     restart: unless-stopped
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@ferreteriaalexis.com
       PGADMIN_DEFAULT_PASSWORD: admin123
     ports:
-      - "5050:80"
+      - "${PGADMIN_HOST_PORT:-5050}:80"
     depends_on:
       postgres:
         condition: service_healthy

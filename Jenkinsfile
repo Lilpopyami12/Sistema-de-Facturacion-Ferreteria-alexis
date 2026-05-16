@@ -6,7 +6,11 @@ pipeline {
   }
 
   environment {
-    DATABASE_URL = 'postgres://postgres:postgres@localhost:55432/ferreteria_alexis'
+    POSTGRES_CONTAINER_NAME = 'ferreteria_alexis_postgres_jenkins'
+    POSTGRES_HOST_PORT = '55433'
+    PGADMIN_CONTAINER_NAME = 'ferreteria_alexis_pgadmin_jenkins'
+    PGADMIN_HOST_PORT = '5052'
+    DATABASE_URL = 'postgres://postgres:postgres@localhost:55433/ferreteria_alexis'
     PORT = '4000'
     API_BASE_URL = 'http://localhost:4000'
   }
