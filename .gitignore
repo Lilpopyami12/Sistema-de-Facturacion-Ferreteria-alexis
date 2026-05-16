@@ -8,12 +8,16 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+tools/
 dist
 dist-ssr
 *.local
 .env
 server/.env
 *.hprof
+jmeter-tests/results*.jtl
+jmeter-tests/dashboard-*/
+jmeter-tests/dashboard/
 
 # Editor directories and files
 .vscode/*
