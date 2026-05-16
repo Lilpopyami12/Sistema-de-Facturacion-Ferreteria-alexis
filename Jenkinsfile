@@ -51,6 +51,18 @@ pipeline {
     stage('Levantar base de datos con Docker') {
       steps {
         sh 'docker compose up -d postgres'
+        sh '''
+          for i in $(seq 1 30); do
+            if docker compose exec -T postgres pg_isready -U postgres -d ferreteria_alexis; then
+              exit 0
+            fi
+            sleep 2
+          done
+
+          echo "PostgreSQL no estuvo listo a tiempo."
+          docker compose logs postgres
+          exit 1
+        '''
       }
     }
 
