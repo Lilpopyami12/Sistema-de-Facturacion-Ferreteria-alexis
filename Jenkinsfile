@@ -24,7 +24,12 @@ pipeline {
     stage('Checkout') {
       steps {
         checkout scm
-        sh 'rm -rf jmeter-tests/dashboard jmeter-tests/dashboard-* jmeter-tests/results*.jtl api.log api.pid'
+        sh '''
+          docker run --rm \
+            -v "$PWD:/work" \
+            alpine:3.20 \
+            sh -c 'rm -rf /work/jmeter-tests/dashboard /work/jmeter-tests/dashboard-* /work/jmeter-tests/results*.jtl /work/api.log /work/api.pid'
+        '''
       }
     }
 
@@ -100,6 +105,8 @@ pipeline {
         sh '''
           mkdir -p jmeter-tests/dashboard
           docker run --rm --network host \
+            --user "$(id -u):$(id -g)" \
+            -e HOME=/tmp \
             -v "$PWD:/work" \
             alpine/jmeter:5.6.3 \
             -n \
