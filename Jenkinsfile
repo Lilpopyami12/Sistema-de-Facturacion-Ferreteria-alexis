@@ -24,6 +24,7 @@ pipeline {
     stage('Checkout') {
       steps {
         checkout scm
+        sh 'rm -rf jmeter-tests/dashboard jmeter-tests/dashboard-* jmeter-tests/results*.jtl api.log api.pid'
       }
     }
 

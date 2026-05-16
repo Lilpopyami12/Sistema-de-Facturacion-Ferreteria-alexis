@@ -5,7 +5,14 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist', 'tools', 'jmeter-tests/dashboard-*']),
+  globalIgnores([
+    'dist',
+    'tools',
+    'jmeter-tests/dashboard',
+    'jmeter-tests/dashboard/**',
+    'jmeter-tests/dashboard-*',
+    'jmeter-tests/dashboard-*/**',
+  ]),
   {
     files: ['**/*.{js,jsx}'],
     extends: [
